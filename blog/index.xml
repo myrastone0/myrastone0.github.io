@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Myra Stone</title>
+    <link>https://myrastone0.github.io/blog/</link>
+    <description>Recent content in Blogs on Myra Stone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Copyright &amp;copy; 2020 Designed by [Themefisher](https://themefisher.com) &amp; Developed by [Gethugothemes](https://gethugothemes.com)</copyright>
+    <lastBuildDate>Sat, 23 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://myrastone0.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Searching for Galactic Winds</title>
+      <link>https://myrastone0.github.io/blog/fir_gws/</link>
+      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/fir_gws/</guid>
+      <description>Galactic-scale outflows (or winds) are powered by stellar and/or supermassive black-hole (SMBH) accretion processes which inject energy and momentum into the interstellar medium (ISM). On a grand scale, winds may significantly affect the assembly and evolution of galaxies.</description>
+    </item>
+    
+    <item>
+      <title>Web Scraping in Python with BeautifulSoup: Collecting NBA Team Box Scores</title>
+      <link>https://myrastone0.github.io/blog/nba_web_scrape/</link>
+      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/nba_web_scrape/</guid>
+      <description>Introduction This project uses Python and BeautifulSoup to scrape ESPN for the box scores of regular season games for NBA teams. The box score is a selected set of statistics which summarize the results of a game.</description>
+    </item>
+    
+    <item>
+      <title>Iris Classification</title>
+      <link>https://myrastone0.github.io/blog/iris_classification/</link>
+      <pubDate>Fri, 22 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/iris_classification/</guid>
+      <description>Using a data set from Kaggle, build a classifier to determine an iris species based on petal and sepal characteristics.
+ Problem Definition  Aim Feature Values (independent variables) Target Values (dependent variables) Inputs (the entire data set or a subset of it) Outputs (prediciton, classification)   Exploratory Data Analysis  Data Overview Visualization Data Preprocessing Data Cleaning   Model Deployment  Training the model(s)    Classify iris flowers as one of three species by using measurements of sepal length/width and petal length/width.</description>
+    </item>
+    
+    <item>
+      <title>How To Setup Meghna Hugo</title>
+      <link>https://myrastone0.github.io/blog/installation/</link>
+      <pubDate>Wed, 12 Sep 2018 14:51:12 +0600</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/installation/</guid>
+      <description>Install this template by following those simple steps: STEP-1 : Hugo installation Check this link below for install hugo on your computer. hugo install documentation</description>
+    </item>
+    
+    <item>
+      <title>Simple Blog Post</title>
+      <link>https://myrastone0.github.io/blog/simple-blog-post-3/</link>
+      <pubDate>Wed, 12 Sep 2018 12:52:36 +0600</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/simple-blog-post-3/</guid>
+      <description>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</description>
+    </item>
+    
+    <item>
+      <title>Simple Blog Post</title>
+      <link>https://myrastone0.github.io/blog/simple-blog-post-4/</link>
+      <pubDate>Wed, 12 Sep 2018 12:52:36 +0600</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/simple-blog-post-4/</guid>
+      <description>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</description>
+    </item>
+    
+    <item>
+      <title>Simple Blog Post</title>
+      <link>https://myrastone0.github.io/blog/simple-blog-post-5/</link>
+      <pubDate>Wed, 12 Sep 2018 12:52:36 +0600</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/simple-blog-post-5/</guid>
+      <description>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</description>
+    </item>
+    
+    <item>
+      <title>Simple Blog Post</title>
+      <link>https://myrastone0.github.io/blog/simple-blog-post-6/</link>
+      <pubDate>Wed, 12 Sep 2018 12:52:36 +0600</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/simple-blog-post-6/</guid>
+      <description>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</description>
+    </item>
+    
+    <item>
+      <title>Simple Blog Post</title>
+      <link>https://myrastone0.github.io/blog/simple-blog-post-7/</link>
+      <pubDate>Wed, 12 Sep 2018 12:52:36 +0600</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/simple-blog-post-7/</guid>
+      <description>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</description>
+    </item>
+    
+  </channel>
+</rss>

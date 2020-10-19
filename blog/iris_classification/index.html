@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Iris Classification</title>
+
+
+	<!-- mobile responsive meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="Classifying iris flowers by petal characteristics.">
+	
+	<meta name="author" content="Themefisher">
+	<meta name="generator" content="Hugo 0.74.3" />
+
+	<!-- plugins -->
+	
+	<link rel="stylesheet" href="https://myrastone0.github.io/plugins/bootstrap/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="https://myrastone0.github.io/plugins/themify-icons/themify-icons.css">
+	
+	<link rel="stylesheet" href="https://myrastone0.github.io/plugins/magnific-popup/magnific-popup.css">
+	
+	<link rel="stylesheet" href="https://myrastone0.github.io/plugins/slick/slick.css">
+	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anaheim%7cQuattrocento&#43;Sans:400,700&amp;display=swap">
+	
+
+	<!-- Main Stylesheet -->
+	
+	<link rel="stylesheet" href="https://myrastone0.github.io/css/style.min.css" media="screen">
+
+	<!-- Custom stylesheet - for your changes -->
+	
+  <link rel="stylesheet" href="https://myrastone0.github.io/css/custom.min.css" media="screen">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="https://myrastone0.github.io/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="https://myrastone0.github.io/images/favicon.png" type="image/x-icon">
+
+	
+
+</head>
+
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="55">
+  <div id="content">
+    
+
+
+<section class="sticky-top navigation">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand p-0" href="https://myrastone0.github.io/">
+				
+				<img class="lozad" data-src="https://myrastone0.github.io/images/my_logo.png" alt="Myra Stone" height="42">
+				
+			</a>
+
+			
+			<a href="https://www.linkedin.com/in/myra-stone/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+				<svg  height="25"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="25" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+			</a>
+			
+			
+			<a href="https://github.com/myrastone0" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+				<svg  height="25"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="25" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+			</a>
+			
+
+
+			<button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navigation">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" href="https://myrastone0.github.io/#blog">Projects</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="https://myrastone0.github.io/#publications">Publications</a>
+					</li>
+					
+					<li class="nav-item">
+            <a class="nav-link" href="https://myrastone0.github.io/#contact">Contact</a>
+					</li>
+					
+				</ul>
+				
+			</div>
+		</nav>
+	</div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <h1>Iris Classification</h1>
+        <ul class="list-inline mb-50">
+          <li class="list-inline-item"><a href="https://myrastone0.github.io/author//"></a></li>
+          <li class="list-inline-item">Friday, May 22, 2020</li>
+        </ul>
+        <img class="img-fluid mb-50 lozad" data-src="https://myrastone0.github.io/images/blog/irises.jpg" alt="blog-image">
+      </div>
+      <div class="col-lg-8 offset-lg-2">
+        <div class="post-single-content">
+          <p>Using a data set from Kaggle, build a classifier to determine an iris species based on petal and sepal characteristics.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ol>
+<li>Problem Definition
+<ol>
+<li>Aim</li>
+<li>Feature Values (independent variables)</li>
+<li>Target Values (dependent variables)</li>
+<li>Inputs (the entire data set or a subset of it)</li>
+<li>Outputs (prediciton, classification)</li>
+</ol>
+</li>
+<li>Exploratory Data Analysis
+<ol>
+<li>Data Overview</li>
+<li>Visualization</li>
+<li>Data Preprocessing</li>
+<li>Data Cleaning</li>
+</ol>
+</li>
+<li>Model Deployment
+<ol>
+<li>Training the model(s)</li>
+</ol>
+</li>
+</ol>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Classify iris flowers as one of three species by using measurements of sepal length/width and petal length/width.</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>sepal_length [cm]</li>
+<li>sepal_width [cm]</li>
+<li>petal_length [cm]</li>
+<li>petal_width [cm]</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>iris setosa [T/F]</li>
+<li>iris versicolour [T/F]</li>
+<li>iris virginica [T/F]</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>The iris data set (<a href="https://www.kaggle.com/uciml/iris">https://www.kaggle.com/uciml/iris</a>) retrieved from kaggle.</p>
+<!-- raw HTML omitted -->
+<p>We&rsquo;ll be running several different models, so there will be different types of outputs (e.g. &hellip;&hellip;..</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span>load_ext autoreload
+<span style="color:#f92672">%</span>autoreload <span style="color:#ae81ff">2</span>
+<span style="color:#f92672">%</span>matplotlib inline
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#import warnings</span>
+<span style="color:#75715e">#warnings.filterwarnings(&#39;ignore&#39;)</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+<span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> classification_report
+<span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> confusion_matrix
+<span style="color:#f92672">from</span> sklearn.metrics <span style="color:#f92672">import</span> accuracy_score
+<span style="color:#f92672">import</span> matplotlib.ticker <span style="color:#f92672">as</span> ticker
+<span style="color:#f92672">import</span> matplotlib.pylab <span style="color:#f92672">as</span> pylab
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">from</span> pandas <span style="color:#f92672">import</span> get_dummies
+<span style="color:#f92672">import</span> matplotlib <span style="color:#f92672">as</span> mpl
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib
+<span style="color:#f92672">import</span> warnings
+<span style="color:#f92672">import</span> sklearn
+<span style="color:#f92672">import</span> scipy
+<span style="color:#f92672">import</span> numpy
+<span style="color:#f92672">import</span> json
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> csv
+<span style="color:#f92672">import</span> os
+
+<span style="color:#f92672">from</span> fastai.imports <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> fastai.structured <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</code></pre></div><pre><code>/anaconda2/envs/myFastAI/lib/python3.6/site-packages/sklearn/ensemble/weight_boosting.py:29: DeprecationWarning: numpy.core.umath_tests is an internal NumPy module and should not be imported. It will be removed in a future NumPy release.
+  from numpy.core.umath_tests import inner1d
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_plot_sizes</span>(sml, med, big):
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;font&#39;</span>, size<span style="color:#f92672">=</span>sml)          <span style="color:#75715e"># controls default text sizes</span>
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;axes&#39;</span>, titlesize<span style="color:#f92672">=</span>sml)     <span style="color:#75715e"># fontsize of the axes title</span>
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;axes&#39;</span>, labelsize<span style="color:#f92672">=</span>med)     <span style="color:#75715e"># fontsize of the x and y labels</span>
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;xtick&#39;</span>, labelsize<span style="color:#f92672">=</span>sml)    <span style="color:#75715e"># fontsize of the tick labels</span>
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;ytick&#39;</span>, labelsize<span style="color:#f92672">=</span>sml)    <span style="color:#75715e"># fontsize of the tick labels</span>
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;legend&#39;</span>, fontsize<span style="color:#f92672">=</span>sml)    <span style="color:#75715e"># legend fontsize</span>
+    plt<span style="color:#f92672">.</span>rc(<span style="color:#e6db74">&#39;figure&#39;</span>, titlesize<span style="color:#f92672">=</span>big)   <span style="color:#75715e"># fontsize of the figure title</span>
+
+plt<span style="color:#f92672">.</span>style<span style="color:#f92672">.</span>use(<span style="color:#e6db74">&#39;ggplot&#39;</span>)
+set_plot_sizes(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">16</span>)
+pylab<span style="color:#f92672">.</span>rcParams[<span style="color:#e6db74">&#39;figure.figsize&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">8</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;data/IRIS.csv&#39;</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<p>Let&rsquo;s get a general idea of what our data looks like and contains.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>head()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>describe()
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>index
+</code></pre></div><pre><code>RangeIndex(start=0, stop=150, step=1)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>info()
+</code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 6 columns):
+Id              150 non-null int64
+sepal_length    150 non-null float64
+sepal_width     150 non-null float64
+petal_length    150 non-null float64
+petal_width     150 non-null float64
+species         150 non-null object
+dtypes: float64(4), int64(1), object(1)
+memory usage: 7.1+ KB
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>isnull()<span style="color:#f92672">.</span>sum()
+</code></pre></div><pre><code>Id              0
+sepal_length    0
+sepal_width     0
+petal_length    0
+petal_width     0
+species         0
+dtype: int64
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Convert categories to number IDs.</span>
+t <span style="color:#f92672">=</span> train_cats(df)
+
+<span style="color:#75715e"># To look at the category labels</span>
+<span style="color:#75715e"># df.species.cat.categories</span>
+
+<span style="color:#75715e"># To look at the numerical codes for the category labels</span>
+<span style="color:#75715e"># df.species.cat.codes</span>
+</code></pre></div><p>If a category gets a particular number in the train data, it should have the same value in the test data. For instance, if the train data has 3 for high and test data has 2, then it will have two different meanings. We can use <code>apply_cats</code> for validation and test sets to make sure that the mappings are the same throughout the different sets</p>
+<p>Normally, pandas will continue displaying the text categories, while treating them as numerical data internally. Optionally, we can replace the text categories with numbers, which will make this variable non-categorical, like so:.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#df.species = df.species.cat.codes</span>
+</code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>If they exist, what are the relationships between two features?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>FacetGrid(df, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;species&#34;</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>) \
+   <span style="color:#f92672">.</span>map(plt<span style="color:#f92672">.</span>scatter, <span style="color:#e6db74">&#34;sepal_length&#34;</span>, <span style="color:#e6db74">&#34;sepal_width&#34;</span>) \
+   <span style="color:#f92672">.</span>add_legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="irisClassification_files/irisClassification_18_0.png" alt="png"></p>
+<!-- raw HTML omitted -->
+<p>Let&rsquo;s get an idea of the distributions of our data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>hist(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;slateblue&#39;</span>, density<span style="color:#f92672">=</span>True)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="irisClassification_files/irisClassification_20_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>plotting<span style="color:#f92672">.</span>scatter_matrix(df,figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;slateblue&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="irisClassification_files/irisClassification_21_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>pairplot(df, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;species&#34;</span>,diag_kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kde&#34;</span>)
+</code></pre></div><pre><code>/anaconda2/envs/myFastAI/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+
+
+
+&lt;seaborn.axisgrid.PairGrid at 0x1c20d62470&gt;
+</code></pre>
+<p><img src="irisClassification_files/irisClassification_22_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>FacetGrid(df, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;species&#34;</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>map(sns<span style="color:#f92672">.</span>kdeplot, <span style="color:#e6db74">&#34;petal_length&#34;</span>)<span style="color:#f92672">.</span>add_legend()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>/anaconda2/envs/myFastAI/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+</code></pre>
+<p><img src="irisClassification_files/irisClassification_23_1.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">sns<span style="color:#f92672">.</span>jointplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sepal_length&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sepal_width&#34;</span>, data<span style="color:#f92672">=</span>df, size<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kde&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;#800000&#39;</span>, space<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</code></pre></div><pre><code>/anaconda2/envs/myFastAI/lib/python3.6/site-packages/seaborn/axisgrid.py:2262: UserWarning: The `size` paramter has been renamed to `height`; please update your code.
+  warnings.warn(msg, UserWarning)
+/anaconda2/envs/myFastAI/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+
+
+
+&lt;seaborn.axisgrid.JointGrid at 0x1c20cf54e0&gt;
+</code></pre>
+<p><img src="irisClassification_files/irisClassification_24_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#e6db74">&#39;species&#39;</span>]<span style="color:#f92672">.</span>value_counts()<span style="color:#f92672">.</span>plot(kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>);
+</code></pre></div><p><img src="irisClassification_files/irisClassification_25_0.png" alt="png"></p>
+<!-- raw HTML omitted -->
+<p>Let&rsquo;s take a closer look at our data.</p>
+<p><code>unique()</code> will return the unique values in a series object.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>species<span style="color:#f92672">.</span>unique()
+</code></pre></div><pre><code>[Iris-setosa, Iris-versicolor, Iris-virginica]
+Categories (3, object): [Iris-setosa &lt; Iris-versicolor &lt; Iris-virginica]
+</code></pre>
+<p><code>value_counts()</code> returns a series containing the counts of unique values (the object will be in descending order).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>species<span style="color:#f92672">.</span>value_counts()
+</code></pre></div><pre><code>Iris-virginica     50
+Iris-versicolor    50
+Iris-setosa        50
+Name: species, dtype: int64
+</code></pre>
+<p><code>sample()</code> will randomly select a number of rows from a data frame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>sample(<span style="color:#ae81ff">5</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>To get a data frame that consists only of entries where a condition is True:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[df[<span style="color:#e6db74">&#39;species&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Iris-setosa&#39;</span>][<span style="color:#ae81ff">45</span>:<span style="color:#ae81ff">55</span>]<span style="color:#75715e">#.tail()</span>
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Data preprocessing refers to the transformations applied to the data before training a model.</p>
+<ul>
+<li>removing Target column (id)</li>
+<li>Sampling (without replacement)</li>
+<li>Making part of iris unbalanced and balancing (with undersampling and SMOTE)</li>
+<li>Introducing missing values and treating them (replacing by average values)</li>
+<li>Noise filtering</li>
+<li>Data discretization</li>
+<li>Normalization and standardization</li>
+<li>PCA analysis</li>
+<li>Feature selection (filter, embedded, wrapper)</li>
+</ul>
+<p>One way to separate data into dependent and indepedent variables is to use integer-location based indexing (<code>iloc</code>).
+The independent varibles, <code>X</code>, for every row will include all columns save the last.
+The dependent variables, <code>y</code>, will be the last column.
+The method <code>values</code> will return an array instead of a data frame.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Get all but the last column of values for the features.</span>
+X <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[:,:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>values
+<span style="color:#75715e"># Get just the last column of values for the target.</span>
+y <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[:,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>values
+</code></pre></div><p>Now that the feature and target values are in arrays, we need the feature and target names.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cols <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>columns
+<span style="color:#66d9ef">print</span>(cols)
+</code></pre></div><pre><code>Index(['Id', 'sepal_length', 'sepal_width', 'petal_length', 'petal_width',
+       'species'],
+      dtype='object')
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Separate the feature column names from the target column name.</span>
+features <span style="color:#f92672">=</span> cols[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">4</span>]
+targets <span style="color:#f92672">=</span> cols[<span style="color:#ae81ff">5</span>]
+
+<span style="color:#75715e"># Check to make sure the feature and target names are correct.</span>
+<span style="color:#66d9ef">print</span>(features)
+<span style="color:#66d9ef">print</span>(targets)
+</code></pre></div><pre><code>Index(['Id', 'sepal_length', 'sepal_width', 'petal_length'], dtype='object')
+species
+</code></pre>
+<!-- raw HTML omitted -->
+<p>Machine learning algorithms make assumptions about the dataset you are modeling.</p>
+<p>Often, raw data is comprised of attributes with varying scales. For example, one attribute may be in kilograms and another may be a count. Although not required, you can often get a boost in performance by carefully choosing methods to rescale your data.</p>
+<p><strong>Data normalization</strong> is the process of rescaling one or more attributes to the range of 0 to 1. You could also use other scales such as -1 to 1, which is useful when using support vector machines and adaboost. Normalization is useful when your data has varying scales and the algorithm you are using does not make assumptions about the distribution of your data (you might not know what the distribution is), such as k-nearest neighbors and artificial neural networks.</p>
+<p><strong>Data standardization</strong> is the process of rescaling one or more attributes so that they have a mean value of 0 and a standard deviation of 1. Standardization is useful when your data has varying scales and the algorithm you are using does make assumptions about your data having a Gaussian distribution, such as linear regression, logistic regression and linear discriminant analysis.</p>
+<p>Here, we&rsquo;ll standardize our data since the KDEs look gaussian.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dfNorm <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(df)
+
+<span style="color:#66d9ef">for</span> feature <span style="color:#f92672">in</span> features:
+    df[feature] <span style="color:#f92672">=</span> (df[feature] <span style="color:#f92672">-</span> df[feature]<span style="color:#f92672">.</span>mean()) <span style="color:#f92672">/</span> df[feature]<span style="color:#f92672">.</span>std()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Shuffle the data bc it&#39;s ordered by species at the moment. When we create a test set</span>
+<span style="color:#75715e"># we want the test set to contain a random assortment of all species.</span>
+indices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(dfNorm<span style="color:#f92672">.</span>index)
+np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>shuffle(indices)
+X <span style="color:#f92672">=</span> dfNorm<span style="color:#f92672">.</span>reindex(indices)[features]
+y <span style="color:#f92672">=</span> dfNorm<span style="color:#f92672">.</span>reindex(indices)[targets]
+</code></pre></div><p>The data needs to be split into a training dataset that can be used to make predictions and a test dataset that we can use to evaluate the accuracy of the model. We need to split the data set randomly. A twiddle good ratio of 70% training and 30% testing.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+
+<span style="color:#75715e"># Generate Training and Validation Sets</span>
+X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=.</span><span style="color:#ae81ff">3</span>)
+
+<span style="color:#75715e"># Convert to np arrays so that we can use with TensorFlow</span>
+X_train <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(X_train)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32)
+X_test  <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(X_test)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32)
+</code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>In pattern recognition, information retrieval and binary classification, precision (also called positive predictive value) is the fraction of relevant instances among the retrieved instances,</p>
+<ul>
+<li><strong>recall</strong> :</li>
+</ul>
+<p>recall is the fraction of relevant instances that have been retrieved over the total amount of relevant instances.</p>
+<ul>
+<li><strong>F-score</strong> :</li>
+</ul>
+<p>the F1 score is a measure of a test&rsquo;s accuracy. It considers both the precision p and the recall r of the test to compute the score: p is the number of correct positive results divided by the number of all positive results returned by the classifier, and r is the number of correct positive results divided by the number of all relevant samples (all samples that should have been identified as positive). The F1 score is the harmonic average of the precision and recall, where an F1 score reaches its best value at 1 (perfect precision and recall) and worst at 0.
+**What is the difference between accuracy and precision?
+&ldquo;Accuracy&rdquo; and &ldquo;precision&rdquo; are general terms throughout science. A good way to internalize the difference are the common &ldquo;bullseye diagrams&rdquo;. In machine learning/statistics as a whole, accuracy vs. precision is analogous to bias vs. variance.</p>
+<ul>
+<li>
+<p>Look at accuracy<!-- raw HTML omitted -->
+One way to evaluate a model is to look at its accuracy. E.g., if we are classifying
+movies as Oscars winners or not, then what proportion of movies can we correctly
+identify as Oscar winners?</p>
+</li>
+<li>
+<p>Error Rates<!-- raw HTML omitted -->
+Confusion matrices are great because they allow us to see what types of errors are
+model makes! If our model makes systematic errors, we need to know that! It is
+easiest to think about error rates in the context of a binary confusion matrix.</p>
+</li>
+</ul>
+<p><!-- raw HTML omitted --></p>
+<ul>
+<li>Baseline Classifiers
+<ul>
+<li>True Positive = You predicted a movie would get an Oscar, and it did!</li>
+<li>True Negative = You predicted a movie would <em>not</em> get an Oscar, and it did not get one.</li>
+<li>False Positive = You predicted a movie would get an Oscar, and it did <em>not</em>.</li>
+<li>False Negative = You predicted a movie would <em>not</em> get an Oscar, but it did.</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>There are several categories for machine learning algorithms, below are some of these categories:</p>
+<ul>
+<li>Linear
+<ul>
+<li>Linear Regression</li>
+<li>Logistic Regression</li>
+<li>Support Vector Machines</li>
+</ul>
+</li>
+<li>Tree-Based
+<ul>
+<li>Decision Tree</li>
+<li>Random Forest</li>
+<li>GBDT</li>
+</ul>
+</li>
+<li>KNN</li>
+<li>Neural Networks</li>
+</ul>
+<hr>
+<p>And if we  want to categorize ML algorithms with the type of learning, there are below type:</p>
+<ul>
+<li>
+<p>Classification</p>
+<ul>
+<li>k-Nearest     Neighbors</li>
+<li>LinearRegression</li>
+<li>SVM</li>
+<li>DT</li>
+<li>NN</li>
+</ul>
+</li>
+<li>
+<p>clustering</p>
+<ul>
+<li>K-means</li>
+<li>HCA</li>
+<li>Expectation Maximization</li>
+</ul>
+</li>
+<li>
+<p>Visualization     and dimensionality  reduction:</p>
+<ul>
+<li>Principal     Component   Analysis(PCA)</li>
+<li>Kernel PCA</li>
+<li>Locally -Linear   Embedding   (LLE)</li>
+<li>t-distributed Stochastic  Neighbor    Embedding   (t-SNE)</li>
+</ul>
+</li>
+<li>
+<p>Association   rule    learning</p>
+<ul>
+<li>Apriori</li>
+<li>Eclat</li>
+</ul>
+</li>
+<li>
+<p>Semisupervised learning</p>
+</li>
+<li>
+<p>Reinforcement Learning</p>
+<ul>
+<li>Q-learning</li>
+</ul>
+</li>
+<li>
+<p>Batch learning &amp; Online learning</p>
+</li>
+<li>
+<p>Ensemble  Learning</p>
+</li>
+</ul>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>The <strong>k-nearest neighbors algorithm</strong> (k-NN) is a non-parametric method used for classification and regression. In both cases, the input consists of the k closest training examples in the feature space. The output depends on whether k-NN is used for classification or regression:</p>
+<p>In k-NN classification, the output is a class membership. An object is classified by a majority vote of its neighbors, with the object being assigned to the class most common among its k nearest neighbors (k is a positive integer, typically small). If k = 1, then the object is simply assigned to the class of that single nearest neighbor.
+In k-NN regression, the output is the property value for the object. This value is the average of the values of its k nearest neighbors.
+k-NN is a type of instance-based learning, or lazy learning, where the function is only approximated locally and all computation is deferred until classification. The k-NN algorithm is among the simplest of all machine learning algorithms.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># K-Nearest Neighbours</span>
+<span style="color:#f92672">from</span> sklearn.neighbors <span style="color:#f92672">import</span> KNeighborsClassifier
+
+Model <span style="color:#f92672">=</span> KNeighborsClassifier(n_neighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>)
+Model<span style="color:#f92672">.</span>fit(X_train, y_train)
+
+y_pred <span style="color:#f92672">=</span> Model<span style="color:#f92672">.</span>predict(X_test)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;kNN Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;kNN accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred))
+</code></pre></div><pre><code>kNN Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       0.95      1.00      0.97        19
+ Iris-virginica       1.00      0.93      0.97        15
+
+    avg / total       0.98      0.98      0.98        45
+
+kNN accuracy:
+ 0.9777777777777777
+</code></pre>
+<p>A confusion matrix can be represented as a data frame. The values along the diagonal (top left to bottom right) are the numbers of correct classifications.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Logistic regression is the appropriate regression analysis to conduct when the dependent variable is <strong>dichotomous</strong> (binary). Like all regression analyses, the logistic regression is a <strong>predictive analysis</strong>.</p>
+<p>Not all data can be described as a binary classification problem. Sometimes a data set can be comprised of <em>k</em> classes. In that case, we use a multinominal approach to classify the data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># LogisticRegression</span>
+<span style="color:#f92672">from</span> sklearn.linear_model <span style="color:#f92672">import</span> LogisticRegression
+clf <span style="color:#f92672">=</span> LogisticRegression(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, solver<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lbfgs&#39;</span>,
+                         multi_class<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;multinomial&#39;</span>)<span style="color:#f92672">.</span>fit(X_train, y_train)
+
+y_pred <span style="color:#f92672">=</span> Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><p>To get the probability that a record is of a certain class:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">clf<span style="color:#f92672">.</span>predict_proba(X_test)[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>]
+</code></pre></div><pre><code>array([[0.96563, 0.03433, 0.00004],
+       [0.01451, 0.59132, 0.39418],
+       [0.09375, 0.76184, 0.1444 ],
+       [0.56359, 0.43635, 0.00006],
+       [0.01582, 0.83322, 0.15096]])
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Logistic Regression Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Logistic Regression accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred))
+</code></pre></div><pre><code>Logistic Regression Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       0.95      1.00      0.97        19
+ Iris-virginica       1.00      0.93      0.97        15
+
+    avg / total       0.98      0.98      0.98        45
+
+Logistic Regression accuracy:
+ 0.9777777777777777
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>The Naive Bayes algorithm is an intuitive method that uses the probabilities of each attribute belonging to each class to make a prediction. It is the supervised learning approach you would come up with if you wanted to model a predictive modeling problem probabilistically.</p>
+<p>Naive bayes simplifies the calculation of probabilities by <strong>assuming that the probability of each attribute belonging to a given class value is independent of all other attributes</strong>. This is a strong assumption but results in a fast and effective method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Naive Bayes</span>
+<span style="color:#f92672">from</span> sklearn.naive_bayes <span style="color:#f92672">import</span> GaussianNB
+Model <span style="color:#f92672">=</span> GaussianNB()
+Model<span style="color:#f92672">.</span>fit(X_train, y_train)
+
+y_pred_NB <span style="color:#f92672">=</span> Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Naive Bayes Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_NB))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Naive Bayes accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_NB))
+</code></pre></div><pre><code>Naive Bayes Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       0.95      1.00      0.97        19
+ Iris-virginica       1.00      0.93      0.97        15
+
+    avg / total       0.98      0.98      0.98        45
+
+Naive Bayes accuracy:
+ 0.9777777777777777
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_NB,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>The advantages of support vector machines are:</p>
+<ul>
+<li>Effective in high dimensional spaces.</li>
+<li>Still effective in cases where number of dimensions is greater than the number of samples.</li>
+<li>Uses a subset of training points in the decision function (called support vectors), so it is also memory efficient.</li>
+<li>Versatile: different Kernel functions can be specified for the decision function. Common kernels are provided, but it is also possible to specify custom kernels.</li>
+</ul>
+<p>The disadvantages of support vector machines include:</p>
+<ul>
+<li>If the number of features is much greater than the number of samples, choosing a Kernel function and a regularization term is crucial to avoid over-fitting.</li>
+<li>SVMs do not directly provide probability estimates, these are calculated using an expensive five-fold cross-validation</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Support Vector Machine</span>
+<span style="color:#f92672">from</span> sklearn.svm <span style="color:#f92672">import</span> SVC
+
+Model <span style="color:#f92672">=</span> SVC()
+Model<span style="color:#f92672">.</span>fit(X_train, y_train)
+
+y_pred_svm <span style="color:#f92672">=</span> Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;SVC Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_svm))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;SVC accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_svm))
+</code></pre></div><pre><code>SVC Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      0.91      0.95        11
+Iris-versicolor       0.90      1.00      0.95        19
+ Iris-virginica       1.00      0.93      0.97        15
+
+    avg / total       0.96      0.96      0.96        45
+
+SVC accuracy:
+ 0.9555555555555556
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_svm,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Similar to <strong>SVC</strong> with parameter kernel=’linear’, but implemented in terms of liblinear rather than libsvm, so it has more flexibility in the choice of penalties and loss functions and should scale better to large numbers of samples.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Linear Support Vector Classification</span>
+<span style="color:#f92672">from</span> sklearn.svm <span style="color:#f92672">import</span> LinearSVC
+
+Model <span style="color:#f92672">=</span> LinearSVC()
+Model<span style="color:#f92672">.</span>fit(X_train, y_train)
+
+y_pred_lsvc <span style="color:#f92672">=</span> Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;LSVC Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_lsvc))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;LSVC accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_lsvc))
+</code></pre></div><pre><code>LSVC Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      0.91      0.95        11
+Iris-versicolor       0.88      0.79      0.83        19
+ Iris-virginica       0.78      0.93      0.85        15
+
+    avg / total       0.88      0.87      0.87        45
+
+LSVC accuracy:
+ 0.8666666666666667
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_lsvc,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Decision Trees (DTs) are a non-parametric supervised learning method used for <strong>classification</strong> and <strong>regression</strong>. The goal is to create a model that predicts the value of a target variable by learning simple <strong>decision rules</strong> inferred from the data features.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Decision Trees</span>
+<span style="color:#f92672">from</span> sklearn.tree <span style="color:#f92672">import</span> DecisionTreeClassifier
+
+Model <span style="color:#f92672">=</span> DecisionTreeClassifier()
+
+Model<span style="color:#f92672">.</span>fit(X_train, y_train)
+
+y_pred_dt <span style="color:#f92672">=</span> Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;DT Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_dt))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;DT accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_dt))
+</code></pre></div><pre><code>DT Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      0.91      0.95        11
+Iris-versicolor       0.95      1.00      0.97        19
+ Iris-virginica       1.00      1.00      1.00        15
+
+    avg / total       0.98      0.98      0.98        45
+
+DT accuracy:
+ 0.9777777777777777
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_dt,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>A random forest is a meta estimator that <strong>fits a number of decision tree classifiers</strong> on various sub-samples of the dataset and uses averaging to improve the predictive accuracy and control over-fitting.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> RandomForestClassifier
+Model<span style="color:#f92672">=</span>RandomForestClassifier(max_depth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+Model<span style="color:#f92672">.</span>fit(X_train,y_train)
+
+y_pred_rf<span style="color:#f92672">=</span>Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;RF Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_rf))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;RF accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_rf))
+</code></pre></div><pre><code>RF Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       0.95      1.00      0.97        19
+ Iris-virginica       1.00      0.93      0.97        15
+
+    avg / total       0.98      0.98      0.98        45
+
+RF accuracy:
+ 0.9777777777777777
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_rf,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>A Bagging classifier is an ensemble <strong>meta-estimator</strong> that fits base classifiers each on random subsets of the original dataset and then aggregate their individual predictions (either by voting or by averaging) to form a final prediction. Such a meta-estimator can typically be used as a way to reduce the variance of a black-box estimator (e.g., a decision tree), by introducing randomization into its construction procedure and then making an ensemble out of it.</p>
+<p>This algorithm encompasses several works from the literature. When random subsets of the dataset are drawn as random subsets of the samples, then this algorithm is known as Pasting . If samples are drawn with replacement, then the method is known as Bagging . When random subsets of the dataset are drawn as random subsets of the features, then the method is known as Random Subspaces . Finally, when base estimators are built on subsets of both samples and features, then the method is known as Random Patches .[http://scikit-learn.org]</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> BaggingClassifier
+Model<span style="color:#f92672">=</span>BaggingClassifier()
+Model<span style="color:#f92672">.</span>fit(X_train,y_train)
+
+y_pred_bc<span style="color:#f92672">=</span>Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;BC Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_bc))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;BC accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_bc))
+</code></pre></div><pre><code>BC Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       1.00      1.00      1.00        19
+ Iris-virginica       1.00      1.00      1.00        15
+
+    avg / total       1.00      1.00      1.00        45
+
+BC accuracy:
+ 1.0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_bc,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>GB builds an additive model in a forward stage-wise fashion; it allows for the optimization of arbitrary differentiable loss functions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> GradientBoostingClassifier
+Model<span style="color:#f92672">=</span>GradientBoostingClassifier()
+Model<span style="color:#f92672">.</span>fit(X_train,y_train)
+
+y_pred_gb<span style="color:#f92672">=</span>Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;GB Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_gb))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;GB accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_gb))
+</code></pre></div><pre><code>GB Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       1.00      1.00      1.00        19
+ Iris-virginica       1.00      1.00      1.00        15
+
+    avg / total       1.00      1.00      1.00        45
+
+GB accuracy:
+ 1.0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_gb,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Linear Discriminant Analysis (discriminant_analysis.LinearDiscriminantAnalysis) and Quadratic Discriminant Analysis (discriminant_analysis.QuadraticDiscriminantAnalysis) are two classic classifiers, with, as their names suggest, a <strong>linear and a quadratic decision surface</strong>, respectively.</p>
+<p>These classifiers are attractive because they have closed-form solutions that can be easily computed, are inherently multiclass, have proven to work well in practice, and have no <strong>hyperparameters</strong> to tune.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.discriminant_analysis <span style="color:#f92672">import</span> LinearDiscriminantAnalysis
+Model<span style="color:#f92672">=</span>LinearDiscriminantAnalysis()
+Model<span style="color:#f92672">.</span>fit(X_train,y_train)
+
+y_pred_lda<span style="color:#f92672">=</span>Model<span style="color:#f92672">.</span>predict(X_test)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Summary of the predictions made by the classifier</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;LDA Classification Report:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,classification_report(y_test, y_pred_gb))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;LDA accuracy:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,accuracy_score(y_test, y_pred_gb))
+</code></pre></div><pre><code>LDA Classification Report:
+                  precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        11
+Iris-versicolor       1.00      1.00      1.00        19
+ Iris-virginica       1.00      1.00      1.00        15
+
+    avg / total       1.00      1.00      1.00        45
+
+LDA accuracy:
+ 1.0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pd<span style="color:#f92672">.</span>crosstab(y_test,y_pred_lda,rownames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;True&#39;</span>], colnames<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;Predicted&#39;</span>], margins<span style="color:#f92672">=</span>True)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --> <!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>K-means clustering is a type of unsupervised learning, which is used when you have unlabeled data (i.e., data without defined categories or groups).</p>
+<p>The goal of this algorithm is <strong>to find groups in the data</strong>, with the number of groups represented by the variable K. The algorithm works iteratively to assign each data point to one of K groups based on the features that are provided.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.cluster <span style="color:#f92672">import</span> KMeans
+
+iris_sp <span style="color:#f92672">=</span> df[[<span style="color:#e6db74">&#39;sepal_length&#39;</span>, <span style="color:#e6db74">&#39;sepal_width&#39;</span>, <span style="color:#e6db74">&#39;petal_length&#39;</span>]]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># k-means cluster analysis for 1-15 clusters</span>
+<span style="color:#f92672">from</span> scipy.spatial.distance <span style="color:#f92672">import</span> cdist
+clusters<span style="color:#f92672">=</span>range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">15</span>)
+meandist<span style="color:#f92672">=</span>[]
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># loop through each cluster and fit the model to the train set</span>
+<span style="color:#75715e"># generate the predicted cluster assingment and append the mean</span>
+<span style="color:#75715e"># distance my taking the sum divided by the shape</span>
+<span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> clusters:
+    model<span style="color:#f92672">=</span>KMeans(n_clusters<span style="color:#f92672">=</span>k)
+    model<span style="color:#f92672">.</span>fit(iris_sp)
+    clusassign<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>predict(iris_sp)
+    meandist<span style="color:#f92672">.</span>append(sum(np<span style="color:#f92672">.</span>min(cdist(iris_sp, model<span style="color:#f92672">.</span>cluster_centers_, <span style="color:#e6db74">&#39;euclidean&#39;</span>), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>))
+    <span style="color:#f92672">/</span> iris_sp<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])
+
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Plot average distance from observations from the cluster centroid
+</span><span style="color:#e6db74">to use the Elbow Method to identify number of clusters to choose
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+plt<span style="color:#f92672">.</span>plot(clusters, meandist)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Number of clusters&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Average distance&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Selecting k with the Elbow Method&#39;</span>)
+<span style="color:#75715e"># pick the fewest number of clusters that reduces the average distance</span>
+<span style="color:#75715e"># If you observe after 3 we can see graph is almost linear</span>
+</code></pre></div><pre><code>Text(0.5, 1.0, 'Selecting k with the Elbow Method')
+</code></pre>
+<p><img src="irisClassification_files/irisClassification_92_1.png" alt="png"></p>
+
+        </div>
+        
+        
+
+<div class="social-share pt-4">
+	<h4>Share:</h4>
+	
+	<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Iris%20Classification&amp;url=https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f"
+		target="_blank" rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M23.44 4.83c-.8.37-1.5.38-2.22.02.93-.56.98-.96 1.32-2.02-.88.52-1.86.9-2.9 1.1-.82-.88-2-1.43-3.3-1.43-2.5 0-4.55 2.04-4.55 4.54 0 .36.03.7.1 1.04-3.77-.2-7.12-2-9.36-4.75-.4.67-.6 1.45-.6 2.3 0 1.56.8 2.95 2 3.77-.74-.03-1.44-.23-2.05-.57v.06c0 2.2 1.56 4.03 3.64 4.44-.67.2-1.37.2-2.06.08.58 1.8 2.26 3.12 4.25 3.16C5.78 18.1 3.37 18.74 1 18.46c2 1.3 4.4 2.04 6.97 2.04 8.35 0 12.92-6.92 12.92-12.93 0-.2 0-.4-.02-.6.9-.63 1.96-1.22 2.56-2.14z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://plus.google.com/share?url=https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--google resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M11.37 12.93c-.73-.52-1.4-1.27-1.4-1.5 0-.43.03-.63.98-1.37 1.23-.97 1.9-2.23 1.9-3.57 0-1.22-.36-2.3-1-3.05h.5c.1 0 .2-.04.28-.1l1.36-.98c.16-.12.23-.34.17-.54-.07-.2-.25-.33-.46-.33H7.6c-.66 0-1.34.12-2 .35-2.23.76-3.78 2.66-3.78 4.6 0 2.76 2.13 4.85 5 4.9-.07.23-.1.45-.1.66 0 .43.1.83.33 1.22h-.08c-2.72 0-5.17 1.34-6.1 3.32-.25.52-.37 1.04-.37 1.56 0 .5.13.98.38 1.44.6 1.04 1.84 1.86 3.55 2.28.87.23 1.82.34 2.8.34.88 0 1.7-.1 2.5-.34 2.4-.7 3.97-2.48 3.97-4.54 0-1.97-.63-3.15-2.33-4.35zm-7.7 4.5c0-1.42 1.8-2.68 3.9-2.68h.05c.45 0 .9.07 1.3.2l.42.28c.96.66 1.6 1.1 1.77 1.8.05.16.07.33.07.5 0 1.8-1.33 2.7-3.96 2.7-1.98 0-3.54-1.23-3.54-2.8zM5.54 3.9c.33-.38.75-.58 1.23-.58h.05c1.35.05 2.64 1.55 2.88 3.35.14 1.02-.08 1.97-.6 2.55-.32.37-.74.56-1.23.56h-.03c-1.32-.04-2.63-1.6-2.87-3.4-.13-1 .08-1.92.58-2.5zM23.5 9.5h-3v-3h-2v3h-3v2h3v3h2v-3h3" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="mailto:?subject=Iris%20Classification&amp;body=https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f" target="_self"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M22 4H2C.9 4 0 4.9 0 6v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7.25 14.43l-3.5 2c-.08.05-.17.07-.25.07-.17 0-.34-.1-.43-.25-.14-.24-.06-.55.18-.68l3.5-2c.24-.14.55-.06.68.18.14.24.06.55-.18.68zm4.75.07c-.1 0-.2-.03-.27-.08l-8.5-5.5c-.23-.15-.3-.46-.15-.7.15-.22.46-.3.7-.14L12 13.4l8.23-5.32c.23-.15.54-.08.7.15.14.23.07.54-.16.7l-8.5 5.5c-.08.04-.17.07-.27.07zm8.93 1.75c-.1.16-.26.25-.43.25-.08 0-.17-.02-.25-.07l-3.5-2c-.24-.13-.32-.44-.18-.68s.44-.32.68-.18l3.5 2c.24.13.32.44.18.68z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link"
+		href="https://reddit.com/submit/?url=https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f&amp;resubmit=true&amp;title=Iris%20Classification" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M24 11.5c0-1.65-1.35-3-3-3-.96 0-1.86.48-2.42 1.24-1.64-1-3.75-1.64-6.07-1.72.08-1.1.4-3.05 1.52-3.7.72-.4 1.73-.24 3 .5C17.2 6.3 18.46 7.5 20 7.5c1.65 0 3-1.35 3-3s-1.35-3-3-3c-1.38 0-2.54.94-2.88 2.22-1.43-.72-2.64-.8-3.6-.25-1.64.94-1.95 3.47-2 4.55-2.33.08-4.45.7-6.1 1.72C4.86 8.98 3.96 8.5 3 8.5c-1.65 0-3 1.35-3 3 0 1.32.84 2.44 2.05 2.84-.03.22-.05.44-.05.66 0 3.86 4.5 7 10 7s10-3.14 10-7c0-.22-.02-.44-.05-.66 1.2-.4 2.05-1.54 2.05-2.84zM2.3 13.37C1.5 13.07 1 12.35 1 11.5c0-1.1.9-2 2-2 .64 0 1.22.32 1.6.82-1.1.85-1.92 1.9-2.3 3.05zm3.7.13c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9.8 4.8c-1.08.63-2.42.96-3.8.96-1.4 0-2.74-.34-3.8-.95-.24-.13-.32-.44-.2-.68.15-.24.46-.32.7-.18 1.83 1.06 4.76 1.06 6.6 0 .23-.13.53-.05.67.2.14.23.06.54-.18.67zm.2-2.8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.7-2.13c-.38-1.16-1.2-2.2-2.3-3.05.38-.5.97-.82 1.6-.82 1.1 0 2 .9 2 2 0 .84-.53 1.57-1.3 1.87z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="whatsapp://send?text=Iris%20Classification%20https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f" target="_blank"
+		rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M20.1 3.9C17.9 1.7 15 .5 12 .5 5.8.5.7 5.6.7 11.9c0 2 .5 3.9 1.5 5.6L.6 23.4l6-1.6c1.6.9 3.5 1.3 5.4 1.3 6.3 0 11.4-5.1 11.4-11.4-.1-2.8-1.2-5.7-3.3-7.8zM12 21.4c-1.7 0-3.3-.5-4.8-1.3l-.4-.2-3.5 1 1-3.4L4 17c-1-1.5-1.4-3.2-1.4-5.1 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7-.1 5.2-4.3 9.4-9.5 9.4zm5.1-7.1c-.3-.1-1.7-.9-1.9-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6s.3-.3.4-.5c.2-.1.3-.3.4-.5.1-.2 0-.4 0-.5C10 9 9.3 7.6 9 7c-.1-.4-.4-.3-.5-.3h-.6s-.4.1-.7.3c-.3.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.3-.3-.4-.6-.5z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+	
+	<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Iris%20Classification&amp;url=https%3a%2f%2fmyrastone0.github.io%2fblog%2firis_classification%2f"
+		target="_blank" rel="noopener" aria-label="">
+		<div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small">
+			<div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+					<path
+						d="M.707 8.475C.275 8.64 0 9.508 0 9.508s.284.867.718 1.03l5.09 1.897 1.986 6.38a1.102 1.102 0 0 0 1.75.527l2.96-2.41a.405.405 0 0 1 .494-.013l5.34 3.87a1.1 1.1 0 0 0 1.046.135 1.1 1.1 0 0 0 .682-.803l3.91-18.795A1.102 1.102 0 0 0 22.5.075L.706 8.475z" />
+				</svg>
+			</div>
+		</div>
+	</a>
+
+</div>
+        
+        
+        <div class="mt-5">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  </div><!-- end Contact Area -->
+<footer id="footer" class="section-bg">
+	<div class="container">
+		<div class="row wow fadeInUp" data-wow-duration="500ms">
+			<div class="col-xl-12">
+
+				<!-- Footer Social Links -->
+				<div class="social-icon">
+					<ul class="list-inline">
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-youtube"></i></a></li>
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-dribbble"></i></a></li>
+						
+						<li class="list-inline-item"><a href="#"><i class="ti-pinterest"></i></a></li>
+						
+					</ul>
+				</div>
+
+				<!-- copyright -->
+				<div class="copyright text-center">
+					<a href="https://myrastone0.github.io/">
+						<img src="https://myrastone0.github.io/images/my_logo.png" alt="Myra Stone" height="42" />
+					</a>
+					<br>
+					<p>Copyright © 2020 Designed by <a href="https://themefisher.com">Themefisher</a> &amp; Developed by <a href="https://gethugothemes.com">Gethugothemes</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- /footer -->
+
+<!-- Google Map API -->
+
+
+<!-- JS Plugins -->
+
+<script src="https://myrastone0.github.io/plugins/jquery/jquery.min.js"></script>
+
+<script src="https://myrastone0.github.io/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://myrastone0.github.io/plugins/slick/slick.min.js"></script>
+
+<script src="https://myrastone0.github.io/plugins/shuffle/shuffle.min.js"></script>
+
+<script src="https://myrastone0.github.io/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="https://myrastone0.github.io/plugins/lazy-load/lozad.min.js"></script>
+
+<script src="https://myrastone0.github.io/plugins/google-map/map.js"></script>
+
+
+<!-- Main Script -->
+
+<script src="https://myrastone0.github.io/js/script.min.882f95f2ea1a162fe7cb4bbb2ebc13a32b588315fc6a9b9f41e8b9b2945ee6b50c0007105cec0ef8810e2ee7094e90ce.js" integrity="sha384-iC&#43;V8uoaFi/ny0u7LrwToytYgxX8apufQei5spRe5rUMAAcQXOwO&#43;IEOLucJTpDO"></script>
+
+
+</body>
+
+</html>
