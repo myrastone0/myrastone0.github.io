@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Copyright &amp;copy; 2020 Designed by [Themefisher](https://themefisher.com) &amp; Developed by [Gethugothemes](https://gethugothemes.com)</copyright>
-    <lastBuildDate>Sat, 23 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://myrastone0.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NBA Team Box Scores (Part 2 of ?): Data Cleaning with Pandas</title>
+      <link>https://myrastone0.github.io/blog/nba_data_cleaning/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/nba_data_cleaning/</guid>
+      <description>I&amp;rsquo;ll use Pandas to clean the 2018-2019 Regular Season NBA Team Box Score data scraped from ESPN.com. The web scraping code can be found here and the CSV file of the raw data can be found here.</description>
+    </item>
+    
+    <item>
+      <title>NBA Team Box Scores (Part 1 of ?): Web Scraping with BeautifulSoup</title>
+      <link>https://myrastone0.github.io/blog/nba_web_scrape/</link>
+      <pubDate>Tue, 20 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://myrastone0.github.io/blog/nba_web_scrape/</guid>
+      <description>Introduction This project uses Python and BeautifulSoup to scrape ESPN for the box scores of regular season games for NBA teams. The box score is a selected set of statistics which summarize the results of a game.</description>
+    </item>
     
     <item>
       <title>Searching for Galactic Winds</title>
@@ -19,15 +37,6 @@
       
       <guid>https://myrastone0.github.io/blog/fir_gws/</guid>
       <description>Galactic-scale outflows (or winds) are powered by stellar and/or supermassive black-hole (SMBH) accretion processes which inject energy and momentum into the interstellar medium (ISM). On a grand scale, winds may significantly affect the assembly and evolution of galaxies.</description>
-    </item>
-    
-    <item>
-      <title>Web Scraping in Python with BeautifulSoup: Collecting NBA Team Box Scores</title>
-      <link>https://myrastone0.github.io/blog/nba_web_scrape/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://myrastone0.github.io/blog/nba_web_scrape/</guid>
-      <description>Introduction This project uses Python and BeautifulSoup to scrape ESPN for the box scores of regular season games for NBA teams. The box score is a selected set of statistics which summarize the results of a game.</description>
     </item>
     
     <item>
