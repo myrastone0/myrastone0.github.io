@@ -7,7 +7,7 @@
 
 	<!-- mobile responsive meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description" content="This is meta description">
+	<meta name="description" content="A box score is a set of statistics which summarize the results of a game. This project uses Python and BeautifulSoup to scrape ESPN for the box scores of regular season games for NBA teams.">
 	
 	<meta name="author" content="Themefisher">
 	<meta name="generator" content="Hugo 0.74.3" />
@@ -107,7 +107,7 @@
       <div class="col-lg-8 offset-lg-2 text-center">
         <h1>Web Scraping in Python with BeautifulSoup: Collecting NBA Team Box Scores</h1>
         <ul class="list-inline mb-50">
-          <li class="list-inline-item"><a href="https://myrastone0.github.io/author/john-doe/">John Doe</a></li>
+          <li class="list-inline-item"><a href="https://myrastone0.github.io/author//"></a></li>
           <li class="list-inline-item">Saturday, May 23, 2020</li>
         </ul>
         <img class="img-fluid mb-50 lozad" data-src="https://myrastone0.github.io/images/blog/kawaiiLeonard.jpg" alt="blog-image">
@@ -125,88 +125,301 @@
 <p>The answers to these questions will be the most useful to a team or a coach when trying to determine what aspects of gameplay to improve upon. If securing more offensive rebounds appears to be more important to winning a game than the percentage of successful free throws, then teams should be drilling rebounds instead of practicing free throws.</p>
 <p>&ldquo;<strong>REWRITE</strong> &hellip;&hellip; In the sport of basketball, the box score is used to summarize/average the data of Games played (GP), Games started (GS), Minutes Played (MIN or MPG), Field-goals made (FGM), Field-goals attempted (FGA), Field-goal percentage (FG%), 3-pointers made (3PM), 3-pointers attempted (3PA), 3-point field goal (3P%), Free throws made (FTM), Free throws attempted (FTA), Free throw percentage (FT%), Offensive Rebounds (OREB), Defensive Rebounds (DREB), Total rebounds (REB), Assists (AST), Turnovers (TOV), Steals (STL), Blocked shots (BLK), Personal fouls (PF), Points scored (PTS), and Plus/Minus for Player efficiency (+/-).&rdquo;</p>
 <h1 id="scrape-espn-team-page-for-team-names">Scrape ESPN Team Page for Team Names</h1>
-<p>First, we&rsquo;re going to need a list of the NBA teams, so let&rsquo;s look at the strucure of the ESPN website. The <a href="https://www.espn.com/nba/teams">teams page</a> looks like the following:
+<p>First, we&rsquo;re going to need a list of the NBA teams, so let&rsquo;s look at the strucure of the ESPN website. The <a href="https://www.espn.com/nba/teams">teams page</a> looks like the following:<!-- raw HTML omitted -->
 <figure>
-    <img src="https://myrastone0.github.io/images/blog/espnTeamPage.png" width="100%"/> 
+    <img src="https://myrastone0.github.io/images/blog/nba_web_scrape/espnTeamPage.png" width="100%"/> 
 </figure>
-</p>
-<p>Inspection of the page shows that links for each team are in a section container with a &lsquo;pl3&rsquo; class.
+<!-- raw HTML omitted --></p>
+<p>Inspection of the page shows that links for each team are in a section container with a &lsquo;pl3&rsquo; class.<!-- raw HTML omitted -->
 <figure>
-    <img src="https://myrastone0.github.io/images/blog/teamContainer.png" width="100%"/> 
+    <img src="https://myrastone0.github.io/images/blog/nba_web_scrape/teamContainer.png" width="100%"/> 
 </figure>
-
+<!-- raw HTML omitted -->
 So let&rsquo;s open the team page, parse it, and find all containers of that class.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
 <span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 <span style="color:#f92672">from</span> bs4 <span style="color:#f92672">import</span> BeautifulSoup
 <span style="color:#f92672">from</span> urllib <span style="color:#f92672">import</span> request
+<span style="color:#f92672">from</span> urllib.error <span style="color:#f92672">import</span> HTTPError, URLError
 <span style="color:#f92672">import</span> time
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">team_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#39;http://www.espn.com/nba/teams&#39;</span>)<span style="color:#f92672">.</span>read()
+
+team_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#39;http://www.espn.com/nba/teams&#39;</span>)<span style="color:#f92672">.</span>read()
 team_soup <span style="color:#f92672">=</span> BeautifulSoup(team_url,<span style="color:#e6db74">&#39;lxml&#39;</span>)
 team_containers <span style="color:#f92672">=</span> team_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>,{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;pl3&#39;</span>})
 </code></pre></div><p>To get the team name, we grab the text inside the &lt;a&gt; tag inside each team&rsquo;s section container. Then we&rsquo;ll get the abbreviation for each team by splitting on &lsquo;/&rsquo; in a team&rsquo;s URL and grabbing the 7th element. Next, we&rsquo;ll create a dictionary of the teams and their abbreviations. This will come in handy later.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">team_names <span style="color:#f92672">=</span> [team<span style="color:#f92672">.</span>a<span style="color:#f92672">.</span>text <span style="color:#66d9ef">for</span> team <span style="color:#f92672">in</span> team_containers]
 team_abbrs <span style="color:#f92672">=</span> [team<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>,href<span style="color:#f92672">=</span>True)[<span style="color:#ae81ff">1</span>][<span style="color:#e6db74">&#39;href&#39;</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">6</span>] <span style="color:#66d9ef">for</span> team <span style="color:#f92672">in</span> team_containers]
-teams <span style="color:#f92672">=</span> dict(zip(team_names,team_abbrs))
+teams <span style="color:#f92672">=</span> dict(zip(team_abbrs,team_names))
 </code></pre></div><p>Let&rsquo;s make sure we got all 30 teams.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(len(teams))
 teams
 </code></pre></div><pre><code>30
 
-
-{'Boston Celtics': 'bos',
- 'Brooklyn Nets': 'bkn',
- 'New York Knicks': 'ny',
- 'Philadelphia 76ers': 'phi',
- 'Toronto Raptors': 'tor',
- 'Chicago Bulls': 'chi',
- 'Cleveland Cavaliers': 'cle',
- 'Detroit Pistons': 'det',
- 'Indiana Pacers': 'ind',
- 'Milwaukee Bucks': 'mil',
- 'Denver Nuggets': 'den',
- 'Minnesota Timberwolves': 'min',
- 'Oklahoma City Thunder': 'okc',
- 'Portland Trail Blazers': 'por',
- 'Utah Jazz': 'utah',
- 'Golden State Warriors': 'gs',
- 'LA Clippers': 'lac',
- 'Los Angeles Lakers': 'lal',
- 'Phoenix Suns': 'phx',
- 'Sacramento Kings': 'sac',
- 'Atlanta Hawks': 'atl',
- 'Charlotte Hornets': 'cha',
- 'Miami Heat': 'mia',
- 'Orlando Magic': 'orl',
- 'Washington Wizards': 'wsh',
- 'Dallas Mavericks': 'dal',
- 'Houston Rockets': 'hou',
- 'Memphis Grizzlies': 'mem',
- 'New Orleans Pelicans': 'no',
- 'San Antonio Spurs': 'sa'}
+{'bos': 'Boston Celtics',
+ 'bkn': 'Brooklyn Nets',
+ 'ny': 'New York Knicks',
+ 'phi': 'Philadelphia 76ers',
+ 'tor': 'Toronto Raptors',
+ 'chi': 'Chicago Bulls',
+ 'cle': 'Cleveland Cavaliers',
+ 'det': 'Detroit Pistons',
+ 'ind': 'Indiana Pacers',
+ 'mil': 'Milwaukee Bucks',
+ 'den': 'Denver Nuggets',
+ 'min': 'Minnesota Timberwolves',
+ 'okc': 'Oklahoma City Thunder',
+ 'por': 'Portland Trail Blazers',
+ 'utah': 'Utah Jazz',
+ 'gs': 'Golden State Warriors',
+ 'lac': 'LA Clippers',
+ 'lal': 'Los Angeles Lakers',
+ 'phx': 'Phoenix Suns',
+ 'sac': 'Sacramento Kings',
+ 'atl': 'Atlanta Hawks',
+ 'cha': 'Charlotte Hornets',
+ 'mia': 'Miami Heat',
+ 'orl': 'Orlando Magic',
+ 'wsh': 'Washington Wizards',
+ 'dal': 'Dallas Mavericks',
+ 'hou': 'Houston Rockets',
+ 'mem': 'Memphis Grizzlies',
+ 'no': 'New Orleans Pelicans',
+ 'sa': 'San Antonio Spurs'}
 </code></pre>
-<h2 id="scraping-espn-team-schedule-page-for-game-ids">Scraping ESPN Team Schedule Page for Game IDs</h2>
+<h1 id="scraping-espn-team-schedule-page-for-game-ids">Scraping ESPN Team Schedule Page for Game IDs</h1>
 <p>The page containing a game&rsquo;s box score is of the following format:<!-- raw HTML omitted -->
 <a href="https://www.espn.com/nba/matchup?gameId=401070218">https://www.espn.com/nba/matchup?gameId=401070218</a>.<!-- raw HTML omitted -->
 So we need to get a list of all the game IDs. We do this by looking at the schedule page of each team.</p>
-<p>A team&rsquo;s regular season schedule is listed on a URL with the following format: <a href="https://www.espn.com/nba/team/schedule/_/name/ABBR/season/YEAR/seasontype/2,">https://www.espn.com/nba/team/schedule/_/name/ABBR/season/YEAR/seasontype/2,</a> where ABBR (team abbreviation) and YEAR are our variables of interest.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">year <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2019&#39;</span>
-team_abbr <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gs&#39;</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">schedule_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#39;https://www.espn.com/nba/team/schedule/_/name/&#39;</span><span style="color:#f92672">+</span>team_abbr<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/season/&#39;</span><span style="color:#f92672">+</span>year<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/seasontype/2&#39;</span>)<span style="color:#f92672">.</span>read()
-schedule_soup <span style="color:#f92672">=</span> BeautifulSoup(schedule_url,<span style="color:#e6db74">&#39;lxml&#39;</span>)
-</code></pre></div><p>Each game has an ID and it is found inside the &lt;span&gt; element with an &lsquo;ml4&rsquo; class.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">games <span style="color:#f92672">=</span> schedule_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;span&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;ml4&#39;</span>})
-game_ids <span style="color:#f92672">=</span> [game<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>,href<span style="color:#f92672">=</span>True)[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;href&#39;</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;=&#39;</span>)[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> game <span style="color:#f92672">in</span> games]
-</code></pre></div><p>Let&rsquo;s make sure we got all 82 regular season games.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(game_ids)
-</code></pre></div><pre><code>82
+<p>A team&rsquo;s regular season schedule is listed on a URL with the following format:<!-- raw HTML omitted -->
+<a href="https://www.espn.com/nba/team/schedule/_/name/ABBR/season/YEAR/seasontype/2,">https://www.espn.com/nba/team/schedule/_/name/ABBR/season/YEAR/seasontype/2,</a><!-- raw HTML omitted -->
+where ABBR (team abbreviation) and YEAR are our variables of interest.</p>
+<p>The 2018-2019 Regular Season Schedule for the Golden State Warriors looks like the following:<!-- raw HTML omitted -->
+<figure>
+    <img src="https://myrastone0.github.io/images/blog/nba_web_scrape/teamSchedulePage.png" width="100%"/> 
+</figure>
+</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># For the 2018-2019 regular season</span>
+year <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2019&#39;</span>
+
+team_schedules <span style="color:#f92672">=</span> dict()
+<span style="color:#66d9ef">for</span> team_abbr <span style="color:#f92672">in</span> list(teams<span style="color:#f92672">.</span>keys()):
+    <span style="color:#75715e"># Open the Team Schedule page and parse it.</span>
+    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.espn.com/nba/team/schedule/_/name/&#39;</span><span style="color:#f92672">+</span>team_abbr<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/season/&#39;</span><span style="color:#f92672">+</span>year<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;/seasontype/2&#39;</span>
+    schedule_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(url)<span style="color:#f92672">.</span>read()
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+    schedule_soup <span style="color:#f92672">=</span> BeautifulSoup(schedule_url,<span style="color:#e6db74">&#39;lxml&#39;</span>)
+
+    <span style="color:#75715e"># The class for each table row of a team&#39;s schedule contains the string &#34;Table__TR&#34;.</span>
+    <span style="color:#75715e"># So, search for that and exclude the first row which contains column names.</span>
+    game_rows <span style="color:#f92672">=</span> schedule_soup<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;tr[class*=&#34;Table__TR&#34;]&#39;</span>)[<span style="color:#ae81ff">1</span>:]
+
+    <span style="color:#75715e"># Grab the dates of each game.</span>
+    game_dates <span style="color:#f92672">=</span> [game<span style="color:#f92672">.</span>td<span style="color:#f92672">.</span>span<span style="color:#f92672">.</span>text <span style="color:#66d9ef">for</span> game <span style="color:#f92672">in</span> game_rows]
+    <span style="color:#75715e"># Append the team_abbr to each game ID. These will be used as dictionary keys later on.</span>
+    <span style="color:#75715e"># For each row, get the all the &lt;a&gt; tag hyperlinks, select the third hyperlink,</span>
+    <span style="color:#75715e"># split on the equals sign, and take the second element of the split to get the gameID.</span>
+    game_ids <span style="color:#f92672">=</span> [team_abbr<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;_&#39;</span><span style="color:#f92672">+</span>game<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;a&#39;</span>,href<span style="color:#f92672">=</span>True)[<span style="color:#ae81ff">2</span>][<span style="color:#e6db74">&#39;href&#39;</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;=&#39;</span>)[<span style="color:#ae81ff">1</span>] <span style="color:#66d9ef">for</span> game <span style="color:#f92672">in</span> game_rows]
+
+    <span style="color:#75715e"># The game locations are stored in a section element of class &#34;flex items-center opponent-logo&#34;.</span>
+    game_logos <span style="color:#f92672">=</span> [game<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;flex items-center opponent-logo&#39;</span>}) <span style="color:#66d9ef">for</span> game <span style="color:#f92672">in</span> game_rows]
+    <span style="color:#75715e"># Game locations are indicated by &#34;@&#34; or &#34;vs&#34; for away and home, respectively.</span>
+    game_locs <span style="color:#f92672">=</span> [game[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>span<span style="color:#f92672">.</span>text <span style="color:#66d9ef">for</span> game <span style="color:#f92672">in</span> game_logos]
+
+    <span style="color:#75715e"># The result of a game is stored in a span element with a class containing the string &#34;fw-bold clr-&#34;.</span>
+    game_results <span style="color:#f92672">=</span> [game<span style="color:#f92672">.</span>text <span style="color:#66d9ef">for</span> game <span style="color:#f92672">in</span> schedule_soup<span style="color:#f92672">.</span>select(<span style="color:#e6db74">&#39;span[class*=&#34;fw-bold clr-&#34;]&#39;</span>)]
+
+    <span style="color:#75715e"># Put table rows into a dictionary with a key of format teamABBR_gameID</span>
+    team_rows <span style="color:#f92672">=</span> list(zip(game_dates, game_locs, game_results))
+    team_schedules<span style="color:#f92672">.</span>update(zip(game_ids,team_rows))
+</code></pre></div><h1 id="scraping-the-box-scores">Scraping the Box Scores</h1>
+<p>There are three tables of class &ldquo;mod-data&rdquo; on the Team Matchup page. Recall, the Team Matchup URL is of the format:<!-- raw HTML omitted -->
+<a href="https://www.espn.com/nba/matchup?gameId=401070218,">https://www.espn.com/nba/matchup?gameId=401070218,</a> and the page looks like the following:<!-- raw HTML omitted -->
+<figure>
+    <img src="https://myrastone0.github.io/images/blog/nba_web_scrape/teamMatchUpPage.png" width="100%"/> 
+</figure>
+<!-- raw HTML omitted -->
+We&rsquo;re interested in the largest table which contains the team box score (FG, FG%, 3PT, etc.) for this particular game.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_box_score</span>(table_data):
+    <span style="color:#e6db74">&#34;&#34;&#34; Get all the cell data in a table. &#34;&#34;&#34;</span>
+    box_data <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> tr <span style="color:#f92672">in</span> table_data:
+        td <span style="color:#f92672">=</span> tr<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;td&#39;</span>)
+        row <span style="color:#f92672">=</span> [tr<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\t\n</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">for</span> tr <span style="color:#f92672">in</span> td]
+        box_data<span style="color:#f92672">.</span>append(row)
+    <span style="color:#66d9ef">return</span> box_data
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">final_data <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> key <span style="color:#f92672">in</span> list(team_schedules<span style="color:#f92672">.</span>keys()):
+    team_abbr <span style="color:#f92672">=</span> key<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;_&#39;</span>)[<span style="color:#ae81ff">0</span>]
+    game_id <span style="color:#f92672">=</span> key<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;_&#39;</span>)[<span style="color:#ae81ff">1</span>]
+
+    <span style="color:#75715e"># Make sure the URL opens</span>
+    <span style="color:#66d9ef">try</span>:
+        box_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#39;https://www.espn.com/nba/matchup?gameId=&#39;</span><span style="color:#f92672">+</span>game_id)<span style="color:#f92672">.</span>read()
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+    <span style="color:#75715e"># If there is an HTTP error, wait 2 mins and try again.</span>
+    <span style="color:#66d9ef">except</span> HTTPError <span style="color:#66d9ef">as</span> e:
+        <span style="color:#66d9ef">print</span>(team_abbr, game_id, e<span style="color:#f92672">.</span>reason)
+        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">120</span>)
+        box_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#39;https://www.espn.com/nba/matchup?gameId=&#39;</span><span style="color:#f92672">+</span>game_id)<span style="color:#f92672">.</span>read()
+        <span style="color:#66d9ef">pass</span>
+
+    <span style="color:#75715e"># Make sure the URL has the same table format.</span>
+    <span style="color:#66d9ef">try</span>:
+        box_soup <span style="color:#f92672">=</span> BeautifulSoup(box_url,<span style="color:#e6db74">&#39;lxml&#39;</span>)
+
+        <span style="color:#75715e"># Table containing the box score data</span>
+        box_table <span style="color:#f92672">=</span> box_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;table&#39;</span>,attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;mod-data&#39;</span>})[<span style="color:#ae81ff">0</span>]
+
+        <span style="color:#75715e"># Get abbreviation and game points of the home team.</span>
+        home_team_container <span style="color:#f92672">=</span> box_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;team home&#39;</span>})
+        home_team_abbr <span style="color:#f92672">=</span> home_team_container[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;span&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;abbrev&#39;</span>})[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>lower()
+        home_team_pts <span style="color:#f92672">=</span> box_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;score icon-font-before&#39;</span>})[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text
+
+        <span style="color:#75715e"># Get abbreviation and game points of the away team.</span>
+        away_team_container <span style="color:#f92672">=</span> box_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;team away&#39;</span>})
+        away_team_abbr <span style="color:#f92672">=</span> away_team_container[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;span&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;abbrev&#39;</span>})[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text<span style="color:#f92672">.</span>lower()
+        away_team_pts <span style="color:#f92672">=</span> box_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;div&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;score icon-font-after&#39;</span>})[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>text
+
+        <span style="color:#75715e"># Put the game points and a column name in a list.</span>
+        points <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;PTS&#39;</span>, away_team_pts, home_team_pts]
+
+        <span style="color:#75715e"># Table rows with an indent class</span>
+        indents <span style="color:#f92672">=</span> box_table<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;tr&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;indent&#39;</span>})
+        <span style="color:#75715e"># Table rows with a highlight class</span>
+        highlights <span style="color:#f92672">=</span> box_table<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;tr&#39;</span>, attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;highlight&#39;</span>})
+
+        <span style="color:#75715e"># Get the box scores</span>
+        highlights_data <span style="color:#f92672">=</span> get_box_score(highlights)
+        indents_data <span style="color:#f92672">=</span> get_box_score(indents)
+
+        <span style="color:#75715e"># Concatenate points, highlights, and indents lists. Then transpose.</span>
+        box_data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate(([points],highlights_data,indents_data))<span style="color:#f92672">.</span>T
+
+        <span style="color:#75715e"># List the team&#39;s data first then the opponent&#39;s data.</span>
+        <span style="color:#75715e"># Also include the gameID, game date, game location, and game result.</span>
+        <span style="color:#66d9ef">if</span> team_abbr <span style="color:#f92672">==</span> away_team_abbr:
+            row <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate(([team_abbr,teams[team_abbr],game_id],team_schedules[key],box_data[<span style="color:#ae81ff">1</span>],
+                                  [home_team_abbr,teams[home_team_abbr]],box_data[<span style="color:#ae81ff">2</span>]))
+        <span style="color:#66d9ef">else</span>:
+            row <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate(([team_abbr,teams[team_abbr],game_id],team_schedules[key],box_data[<span style="color:#ae81ff">2</span>],
+                                  [away_team_abbr,teams[away_team_abbr]],box_data[<span style="color:#ae81ff">1</span>]))
+        final_data<span style="color:#f92672">.</span>append(row)
+
+    <span style="color:#75715e"># If the URL does not have the box score, skip this game ID and continue to the next one.</span>
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">IndexError</span> <span style="color:#66d9ef">as</span> e:
+        <span style="color:#66d9ef">print</span>(team_abbr, game_id, e)
+        <span style="color:#66d9ef">continue</span>
+</code></pre></div><pre><code>mil 401070856 list index out of range
+lac 401070856 list index out of range
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># FROM THE SCHEDULE PAGE I ALSO WANT TO GET THE OPPONENT NAME AND WHETHER IT WAS A HOME (VS) OR</span>
-<span style="color:#75715e"># AN AWAY (@) GAME FOR THE TEAM</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">game_id <span style="color:#f92672">=</span> game_ids[<span style="color:#ae81ff">0</span>]
-box_url <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>urlopen(<span style="color:#e6db74">&#39;https://www.espn.com/nba/matchup?gameId=&#39;</span><span style="color:#f92672">+</span>game_id)
-box_soup <span style="color:#f92672">=</span> BeautifulSoup(box_url,<span style="color:#e6db74">&#39;lxml&#39;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">box_soup<span style="color:#f92672">.</span>find_all(<span style="color:#e6db74">&#39;table&#39;</span>,attrs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;mod-data&#39;</span>})
+<p>Looks like gameID = 401070856 between the Milwaukee Bucks and the L.A. Clippers is the only game which did not have a MatchUp page.</p>
+<p>Let&rsquo;s get a list of the box score stats.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">box_data[<span style="color:#ae81ff">0</span>]
+</code></pre></div><pre><code>array(['PTS', 'FG', 'Field Goal %', '3PT', 'Three Point %', 'FT',
+       'Free Throw %', 'Rebounds', 'Assists', 'Steals', 'Blocks',
+       'Total Turnovers', 'Fast Break Points', 'Points in Paint', 'Fouls',
+       'Largest Lead', 'Offensive Rebounds', 'Defensive Rebounds',
+       'Points Off Turnovers', 'Technical Fouls', 'Flagrant Fouls'],
+      dtype='&lt;U20')
+</code></pre>
+<p>The final data frame will contain columns for a team (&lsquo;teamPTS&rsquo;, &lsquo;teamDREB&rsquo;, etc.) and for the opponent of that team (&lsquo;opptPTS&rsquo;, &lsquo;opptDREB&rsquo;, etc.) for a given game. It will also include the gameID, the date the game was played, whether the game was home (&lsquo;vs&rsquo;) or away ('@'), and the result of the game for the team (&lsquo;W&rsquo; or &lsquo;L&rsquo;).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;teamABBR&#39;</span>, <span style="color:#e6db74">&#39;teamName&#39;</span>,<span style="color:#e6db74">&#39;gameID&#39;</span>, <span style="color:#e6db74">&#39;gameDate&#39;</span>, <span style="color:#e6db74">&#39;gameLoc&#39;</span>, <span style="color:#e6db74">&#39;teamResult&#39;</span>, <span style="color:#e6db74">&#39;teamPTS&#39;</span>, <span style="color:#e6db74">&#39;teamFG&#39;</span>, <span style="color:#e6db74">&#39;teamFG%&#39;</span>,
+             <span style="color:#e6db74">&#39;team3PT&#39;</span>, <span style="color:#e6db74">&#39;team3PT%&#39;</span>, <span style="color:#e6db74">&#39;teamFT&#39;</span>, <span style="color:#e6db74">&#39;teamFT%&#39;</span>, <span style="color:#e6db74">&#39;teamTREB&#39;</span>, <span style="color:#e6db74">&#39;teamASST&#39;</span>, <span style="color:#e6db74">&#39;teamSTL&#39;</span>, <span style="color:#e6db74">&#39;teamBLK&#39;</span>,
+             <span style="color:#e6db74">&#39;teamTO&#39;</span>, <span style="color:#e6db74">&#39;teamFB_PTS&#39;</span>, <span style="color:#e6db74">&#39;teamPNT_PTS&#39;</span>, <span style="color:#e6db74">&#39;teamFOUL&#39;</span>, <span style="color:#e6db74">&#39;teamLG_LEAD&#39;</span>, <span style="color:#e6db74">&#39;teamOREB&#39;</span>, <span style="color:#e6db74">&#39;teamDREB&#39;</span>,
+             <span style="color:#e6db74">&#39;teamTO_PTS&#39;</span>, <span style="color:#e6db74">&#39;teamFOUL_T&#39;</span>, <span style="color:#e6db74">&#39;teamFOUL_F&#39;</span>,
+             <span style="color:#e6db74">&#39;opptABBR&#39;</span>, <span style="color:#e6db74">&#39;opptName&#39;</span>, <span style="color:#e6db74">&#39;opptPTS&#39;</span>, <span style="color:#e6db74">&#39;opptFG&#39;</span>, <span style="color:#e6db74">&#39;opptFG%&#39;</span>,
+             <span style="color:#e6db74">&#39;oppt3PT&#39;</span>, <span style="color:#e6db74">&#39;oppt3PT%&#39;</span>, <span style="color:#e6db74">&#39;opptFT&#39;</span>, <span style="color:#e6db74">&#39;opptFT%&#39;</span>, <span style="color:#e6db74">&#39;opptTREB&#39;</span>, <span style="color:#e6db74">&#39;opptASST&#39;</span>, <span style="color:#e6db74">&#39;opptSTL&#39;</span>, <span style="color:#e6db74">&#39;opptBLK&#39;</span>,
+             <span style="color:#e6db74">&#39;opptTO&#39;</span>, <span style="color:#e6db74">&#39;opptFB_PTS&#39;</span>, <span style="color:#e6db74">&#39;opptPNT_PTS&#39;</span>, <span style="color:#e6db74">&#39;opptFOUL&#39;</span>, <span style="color:#e6db74">&#39;opptLG_LEAD&#39;</span>, <span style="color:#e6db74">&#39;opptOREB&#39;</span>, <span style="color:#e6db74">&#39;opptDREB&#39;</span>,
+             <span style="color:#e6db74">&#39;opptTO_PTS&#39;</span>, <span style="color:#e6db74">&#39;opptFOUL_T&#39;</span>, <span style="color:#e6db74">&#39;opptFOUL_F&#39;</span>]
+
+<span style="color:#75715e"># Create the data frame</span>
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(final_data, columns<span style="color:#f92672">=</span>col_names)
+</code></pre></div><p>Let&rsquo;s check the data frame for a random gameID.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[df<span style="color:#f92672">.</span>gameID<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;401071855&#39;</span>]
+</code></pre></div><table>
+<thead>
+<tr>
+<th></th>
+<th>teamABBR</th>
+<th>teamName</th>
+<th>gameID</th>
+<th>gameDate</th>
+<th>gameLoc</th>
+<th>teamResult</th>
+<th>teamPTS</th>
+<th>teamFG</th>
+<th>teamFG%</th>
+<th>team3PT</th>
+<th>&hellip;</th>
+<th>opptTO</th>
+<th>opptFB_PTS</th>
+<th>opptPNT_PTS</th>
+<th>opptFOUL</th>
+<th>opptLG_LEAD</th>
+<th>opptOREB</th>
+<th>opptDREB</th>
+<th>opptTO_PTS</th>
+<th>opptFOUL_T</th>
+<th>opptFOUL_F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2045</td>
+<td>wsh</td>
+<td>Washington Wizards</td>
+<td>401071855</td>
+<td>Fri, Apr 5</td>
+<td>vs</td>
+<td>L</td>
+<td>112</td>
+<td>42-88</td>
+<td>47.7</td>
+<td>9-32</td>
+<td>&hellip;</td>
+<td>9</td>
+<td>2</td>
+<td>56</td>
+<td>18</td>
+<td>24</td>
+<td>12</td>
+<td>30</td>
+<td>9</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2455</td>
+<td>sa</td>
+<td>San Antonio Spurs</td>
+<td>401071855</td>
+<td>Fri, Apr 5</td>
+<td>@</td>
+<td>W</td>
+<td>129</td>
+<td>51-91</td>
+<td>56.0</td>
+<td>10-25</td>
+<td>&hellip;</td>
+<td>10</td>
+<td>0</td>
+<td>54</td>
+<td>16</td>
+<td>4</td>
+<td>9</td>
+<td>25</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><figure>
+    <img src="https://myrastone0.github.io/images/blog/nba_web_scrape/checkMatchUp.png" width="100%"/> 
+</figure>
+<!-- raw HTML omitted -->
+Looks like we&rsquo;re successful! Now we just save our data to a CSV file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>to_csv(<span style="color:#e6db74">&#39;../data/nba_team_box_scores_&#39;</span><span style="color:#f92672">+</span>str(year)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.csv&#39;</span>)
 </code></pre></div>
         </div>
         
